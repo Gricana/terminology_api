@@ -57,7 +57,7 @@ list_handbooks_schema: Dict = {
             description="Неверный формат даты",
             examples={
                 'application/json': {
-                    'error': 'Invalid date format. Use YYYY-MM-DD.'}
+                    'error': 'Invalid date format. Use \'YYYY-MM-DD\'.'}
             }
         )
     },
@@ -142,7 +142,13 @@ check_element_schema: Dict = {
             description="Неверно указаны параметры",
             examples={
                 "application/json": {
-                    "error": "Parameters 'code' and 'value' are required."}
+                    "code": [
+                        "Обязательное поле."
+                    ],
+                    "value": [
+                        "Обязательное поле."
+                    ]
+                }
             }
         ),
         404: openapi.Response(
