@@ -1,0 +1,96 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-11-27 22:35+0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || "
+"(n%100>=11 && n%100<=14)? 2 : 3);\n"
+
+#: handbook/admin.py:24
+msgid "ID"
+msgstr "Идентификатор"
+
+#: handbook/admin.py:29
+msgid "Current Version"
+msgstr "Текущая версия"
+
+#: handbook/admin.py:34
+msgid "Current Version Date"
+msgstr "Дата текущей версии"
+
+#: handbook/admin.py:53
+msgid "Handbook code"
+msgstr "Код справочника"
+
+#: handbook/admin.py:58
+msgid "Handbook name"
+msgstr "Имя справочника"
+
+#: handbook/admin.py:69
+msgid "Terminology service"
+msgstr "Сервис терминологии"
+
+#: handbook/apps.py:8 handbook/models.py:12 handbook/models.py:38
+msgid "Handbook"
+msgstr "Справочник"
+
+#: handbook/models.py:6
+msgid "Code"
+msgstr "Код справочника"
+
+#: handbook/models.py:8
+msgid "Name"
+msgstr "Название справочника"
+
+#: handbook/models.py:9
+msgid "Description"
+msgstr "Описание справочника"
+
+#: handbook/models.py:13
+msgid "Handbooks"
+msgstr "Справочники"
+
+#: handbook/models.py:39 handbook/models.py:51 handbook/models.py:61
+msgid "Handbook Version"
+msgstr "Версия справочника"
+
+#: handbook/models.py:41
+msgid "Start date"
+msgstr "Дата начала действия версии"
+
+#: handbook/models.py:52
+msgid "Handbook Versions"
+msgstr "Версии справочника"
+
+#: handbook/models.py:62
+msgid "Element code"
+msgstr "Код элемента"
+
+#: handbook/models.py:63
+msgid "Element value"
+msgstr "Значение элемента справочника"
+
+#: handbook/models.py:67
+msgid "Handbook Element"
+msgstr "Элемент справочника"
+
+#: handbook/models.py:68
+msgid "Handbook Elements"
+msgstr "Элементы справочника"
+
+#~ msgid "Element"
+#~ msgstr "элемента справочника"
