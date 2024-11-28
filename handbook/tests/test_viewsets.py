@@ -50,8 +50,8 @@ class HandbookViewSetTests(TestCase):
         response = self.client.get(url, data=params)
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
         self.assertIn('error', response.data)
-        self.assertEqual(response.data['error'],
-                         'Invalid date format. Use YYYY-MM-DD.')
+        self.assertEqual(str(response.data['error']),
+                         'Invalid date format. Use \'YYYY-MM-DD\'.')
 
     def test_filter_handbooks_by_date_with_no_results(self) -> None:
         """
@@ -151,12 +151,22 @@ class HandbookViewSetTests(TestCase):
     def test_missing_code_or_value_in_check_element(self) -> None:
         """
         Тестирует запрос без обязательных параметров 'code' или 'value' в проверке элемента.
-        Ожидается ошибка 400 с сообщением о недостающих параметрах.
+        Ожидается ошибка 400 с сообщением о недостающих параметрах для каждого поля.
         """
         url = reverse('refbook-check-element', args=[1])
+
+        # Пример, когда передается только 'code', без 'value'
         params = {'code': 'A00'}
         response = self.client.get(url, data=params)
+
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
-        self.assertIn('error', response.data)
-        self.assertEqual(response.data['error'],
-                         "Parameters 'code' and 'value' are required.")
+        self.assertIn('value', response.data)
+        self.assertEqual(response.data['value'], ["Обязательное поле."])
+
+        # Пример, когда передается только 'value', без 'code'
+        params = {'value': 'Терапевт'}
+        response_1 = self.client.get(url, data=params)
+
+        self.assertEqual(response_1.status_code, status.HTTP_400_BAD_REQUEST)
+        self.assertIn('code', response_1.data)
+        self.assertEqual(response_1.data['code'], ["Обязательное поле."])
