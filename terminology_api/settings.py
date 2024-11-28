@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     # Trird-party packages
     'rest_framework',
     'drf_yasg',
+    'django_filters',
 ]
 
 MIDDLEWARE = [
@@ -129,7 +130,7 @@ LOCALE_PATHS = [
 TIME_ZONE = 'Europe/Moscow'
 USE_L10N = False
 DATE_FORMAT = 'Y-m-d'
-DATE_INPUT_FORMATS = 'Y-m-d'
+DATE_INPUT_FORMATS = ['Y-m-d']
 
 USE_I18N = True
 
