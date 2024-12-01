@@ -1,0 +1,146 @@
+[
+    {
+        "model": "handbook.handbook",
+        "pk": 1,
+        "fields": {
+            "code": "ICD10",
+            "name": "МКБ-10",
+            "description": "Международная классификация болезней 10-го пересмотра"
+        }
+    },
+    {
+        "model": "handbook.handbook",
+        "pk": 2,
+        "fields": {
+            "code": "MEDS",
+            "name": "Лекарственные средства",
+            "description": "Справочник лекарственных средств"
+        }
+    },
+    {
+        "model": "handbook.handbookversion",
+        "pk": 1,
+        "fields": {
+            "handbook": 1,
+            "version": "2022",
+            "start_date": "2022-01-01"
+        }
+    },
+    {
+        "model": "handbook.handbookversion",
+        "pk": 2,
+        "fields": {
+            "handbook": 1,
+            "version": "2023",
+            "start_date": "2023-01-01"
+        }
+    },
+    {
+        "model": "handbook.handbookversion",
+        "pk": 3,
+        "fields": {
+            "handbook": 2,
+            "version": "2021",
+            "start_date": "2021-01-01"
+        }
+    },
+    {
+        "model": "handbook.handbookversion",
+        "pk": 4,
+        "fields": {
+            "handbook": 2,
+            "version": "2023",
+            "start_date": "2023-06-01"
+        }
+    },
+    {
+        "model": "handbook.handbookelement",
+        "pk": 1,
+        "fields": {
+            "version": 1,
+            "code": "A00",
+            "value": "Холера"
+        }
+    },
+    {
+        "model": "handbook.handbookelement",
+        "pk": 2,
+        "fields": {
+            "version": 1,
+            "code": "B01",
+            "value": "Ветряная оспа"
+        }
+    },
+    {
+        "model": "handbook.handbookelement",
+        "pk": 3,
+        "fields": {
+            "version": 1,
+            "code": "C34",
+            "value": "Опухоль легкого"
+        }
+    },
+    {
+        "model": "handbook.handbookelement",
+        "pk": 4,
+        "fields": {
+            "version": 2,
+            "code": "A00",
+            "value": "Холера (обновлено)"
+        }
+    },
+    {
+        "model": "handbook.handbookelement",
+        "pk": 5,
+        "fields": {
+            "version": 2,
+            "code": "B01",
+            "value": "Ветряная оспа (обновлено)"
+        }
+    },
+    {
+        "model": "handbook.handbookelement",
+        "pk": 6,
+        "fields": {
+            "version": 2,
+            "code": "C34",
+            "value": "Злокачественная опухоль легкого"
+        }
+    },
+    {
+        "model": "handbook.handbookelement",
+        "pk": 7,
+        "fields": {
+            "version": 3,
+            "code": "PARA",
+            "value": "Парацетамол 500 мг"
+        }
+    },
+    {
+        "model": "handbook.handbookelement",
+        "pk": 8,
+        "fields": {
+            "version": 3,
+            "code": "IBU",
+            "value": "Ибупрофен 200 мг"
+        }
+    },
+    {
+        "model": "handbook.handbookelement",
+        "pk": 9,
+        "fields": {
+            "version": 4,
+            "code": "PARA",
+            "value": "Парацетамол 1000 мг"
+        }
+    },
+    {
+        "model": "handbook.handbookelement",
+        "pk": 10,
+        "fields": {
+            "version": 4,
+            "code": "AMOX",
+            "value": "Амоксициллин 875 мг"
+        }
+    }
+]
