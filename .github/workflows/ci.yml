@@ -1,0 +1,23 @@
+name: CI REST API
+
+on: [push, pull_request]
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
+        with:
+          python-version: "3.12"
+      - name: Install dependencies
+        run: |
+          pip install poetry
+          poetry install
+      - name: Run linters
+        run: |
+          poetry run black --check .
+          poetry run flake8
+          poetry run isort --check-only .
+      - name: Run tests
+        run: poetry run python manage.py test
