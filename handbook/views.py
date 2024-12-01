@@ -1,4 +1,4 @@
-from typing import Optional, List
+from typing import List, Optional
 
 from django.core.exceptions import ValidationError as DjangoValidationError
 from django.http import Http404
@@ -9,10 +9,14 @@ from rest_framework.decorators import action
 from rest_framework.exceptions import NotFound, ValidationError
 from rest_framework.response import Response
 
-from .filters import HandbookFilter, HandbookElementFilter
+from .filters import HandbookElementFilter, HandbookFilter
 from .models import Handbook, HandbookElement, HandbookVersion
-from .schema import *
-from .serializers import HandbookSerializer, HandbookElementSerializer
+from .schema import (
+    check_element_schema,
+    get_handbook_elements_schema,
+    list_handbooks_schema,
+)
+from .serializers import HandbookElementSerializer, HandbookSerializer
 
 
 class HandbookViewSet(viewsets.ReadOnlyModelViewSet):
@@ -21,6 +25,7 @@ class HandbookViewSet(viewsets.ReadOnlyModelViewSet):
     Позволяет получать список справочников,
     а также работать с элементами справочников по версиям.
     """
+
     serializer_class = HandbookSerializer
     filter_backends = (DjangoFilterBackend,)
     filterset_class = HandbookFilter
@@ -29,7 +34,7 @@ class HandbookViewSet(viewsets.ReadOnlyModelViewSet):
         """
         Возвращает базовый QuerySet справочников с оптимизацией связанных данных.
         """
-        return Handbook.objects.all().prefetch_related('versions').distinct()
+        return Handbook.objects.all().prefetch_related("versions").distinct()
 
     @swagger_auto_schema(**list_handbooks_schema)
     def list(self, request, *args, **kwargs) -> Response:
@@ -39,7 +44,7 @@ class HandbookViewSet(viewsets.ReadOnlyModelViewSet):
         try:
             queryset = self.filter_queryset(self.get_queryset())
             serializer = self.get_serializer(queryset, many=True)
-            return Response({'refbooks': serializer.data})
+            return Response({"refbooks": serializer.data})
         except DjangoValidationError as e:
             raise ValidationError({"error": e.message})
 
@@ -51,12 +56,12 @@ class HandbookViewSet(viewsets.ReadOnlyModelViewSet):
         return super().retrieve(request, *args, **kwargs)
 
     @swagger_auto_schema(**get_handbook_elements_schema)
-    @action(detail=True, methods=['get'], url_path='elements')
+    @action(detail=True, methods=["get"], url_path="elements")
     def elements(self, request, pk=None) -> Response:
         """
         Возвращает элементы справочника по указанной или текущей версии.
         """
-        version_param = request.query_params.get('version')
+        version_param = request.query_params.get("version")
 
         handbook = self.get_handbook_or_404(pk)
         version = self.get_version_or_404(handbook, version_param)
@@ -67,21 +72,20 @@ class HandbookViewSet(viewsets.ReadOnlyModelViewSet):
         return Response({"elements": serializer.data})
 
     @swagger_auto_schema(**check_element_schema)
-    @action(detail=True, methods=['get'], url_path='check_element')
+    @action(detail=True, methods=["get"], url_path="check_element")
     def check_element(self, request, pk=None) -> Response:
         """
         Проверяет наличие элемента с указанным кодом и значением в указанной версии.
         """
         handbook = self.get_handbook_or_404(pk)
-        version_param = request.query_params.get('version')
+        version_param = request.query_params.get("version")
         version = self.get_version_or_404(handbook, version_param)
 
         queryset = HandbookElement.objects.filter(version=version)
         filterset = HandbookElementFilter(request.GET, queryset=queryset)
 
         if not filterset.is_valid():
-            return Response(filterset.errors,
-                            status=status.HTTP_400_BAD_REQUEST)
+            return Response(filterset.errors, status=status.HTTP_400_BAD_REQUEST)
 
         exists = filterset.qs.exists()
         return Response({"exists": exists}, status=status.HTTP_200_OK)
@@ -95,8 +99,9 @@ class HandbookViewSet(viewsets.ReadOnlyModelViewSet):
         except Http404:
             raise NotFound({"error": "Handbook not found."})
 
-    def get_version_or_404(self, handbook: Handbook,
-                           version_param: Optional[str]) -> HandbookVersion:
+    def get_version_or_404(
+        self, handbook: Handbook, version_param: Optional[str]
+    ) -> HandbookVersion:
         """
         Возвращает указанную версию справочника или текущую версию.
         """
@@ -104,13 +109,13 @@ class HandbookViewSet(viewsets.ReadOnlyModelViewSet):
             try:
                 return handbook.versions.get(version=version_param)
             except HandbookVersion.DoesNotExist:
-                raise NotFound({
-                    "error": f"Version '{version_param}' not found for this handbook."
-                })
+                raise NotFound(
+                    {"error": f"Version '{version_param}' not found for this handbook."}
+                )
         else:
             version = handbook.get_latest_version()
             if not version:
-                raise NotFound({
-                    "error": "No valid current version found for this handbook."
-                })
+                raise NotFound(
+                    {"error": "No valid current version found for this handbook."}
+                )
             return version

@@ -10,7 +10,7 @@ class HandbookSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Handbook
-        fields = ['id', 'code', 'name']
+        fields = ["id", "code", "name"]
 
 
 class HandbookElementSerializer(serializers.ModelSerializer):
@@ -20,4 +20,4 @@ class HandbookElementSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = HandbookElement
-        fields = ['code', 'value']
+        fields = ["code", "value"]

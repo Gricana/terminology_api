@@ -1,8 +1,8 @@
 from django.contrib import admin
-from django.contrib.auth.models import User, Group
+from django.contrib.auth.models import Group, User
 from django.utils.translation import gettext_lazy as _
 
-from .models import Handbook, HandbookVersion, HandbookElement
+from .models import Handbook, HandbookElement, HandbookVersion
 
 
 class HandbookVersionInline(admin.TabularInline):
@@ -11,9 +11,10 @@ class HandbookVersionInline(admin.TabularInline):
     Используется для отображения и редактирования версий справочников
     прямо из интерфейса справочников.
     """
+
     model = HandbookVersion
     extra = 1
-    fields = ['version', 'start_date']
+    fields = ["version", "start_date"]
 
 
 @admin.register(Handbook)
@@ -22,9 +23,9 @@ class HandbookAdmin(admin.ModelAdmin):
     Админ-класс для модели Handbook (Справочник).
     Управляет отображением справочников в админке.
     """
-    list_display = ['get_id', 'code', 'name',
-                    'current_version', 'current_version_date']
-    search_fields = ['code', 'name']
+
+    list_display = ["get_id", "code", "name", "current_version", "current_version_date"]
+    search_fields = ["code", "name"]
     inlines = [HandbookVersionInline]
 
     def get_id(self, obj: Handbook) -> int:
@@ -33,7 +34,7 @@ class HandbookAdmin(admin.ModelAdmin):
         """
         return obj.id
 
-    get_id.short_description = _('ID')
+    get_id.short_description = _("ID")
 
     def current_version(self, obj: Handbook) -> str:
         """
@@ -41,7 +42,7 @@ class HandbookAdmin(admin.ModelAdmin):
         """
         return obj.get_current_version()
 
-    current_version.short_description = _('Current Version')
+    current_version.short_description = _("Current Version")
 
     def current_version_date(self, obj: Handbook) -> str:
         """
@@ -49,7 +50,7 @@ class HandbookAdmin(admin.ModelAdmin):
         """
         return obj.get_current_version_date()
 
-    current_version_date.short_description = _('Current Version Date')
+    current_version_date.short_description = _("Current Version Date")
 
 
 class HandbookElementInline(admin.TabularInline):
@@ -57,9 +58,10 @@ class HandbookElementInline(admin.TabularInline):
     Встраиваемая модель для элементов справочника в админке.
     Используется для отображения и редактирования элементов справочников.
     """
+
     model = HandbookElement
     extra = 1
-    fields = ['code', 'value']
+    fields = ["code", "value"]
 
 
 @admin.register(HandbookVersion)
@@ -68,9 +70,9 @@ class HandbookVersionAdmin(admin.ModelAdmin):
     Админ-класс для модели HandbookVersion (Версия справочника).
     Управляет отображением версий справочников в админке.
     """
-    list_display = ['get_handbook__code', 'get_handbook__name', 'version',
-                    'start_date']
-    search_fields = ['handbook__code', 'handbook__name', 'version']
+
+    list_display = ["get_handbook__code", "get_handbook__name", "version", "start_date"]
+    search_fields = ["handbook__code", "handbook__name", "version"]
     inlines = [HandbookElementInline]
 
     def get_handbook__code(self, obj: HandbookVersion) -> str:
@@ -96,11 +98,12 @@ class HandbookElementAdmin(admin.ModelAdmin):
     Админ-класс для модели HandbookElement (Элемент справочника).
     Управляет отображением элементов справочников в админке.
     """
-    list_display = ['version', 'code', 'value']
+
+    list_display = ["version", "code", "value"]
 
 
 # Убираем модели User и Group из админки.
 admin.site.unregister(User)
 admin.site.unregister(Group)
 
-admin.site.site_header = _('Terminology service')
+admin.site.site_header = _("Terminology service")
