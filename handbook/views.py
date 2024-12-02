@@ -27,17 +27,10 @@ class HandbookViewSet(HandbookMixin, viewsets.ReadOnlyModelViewSet):
     а также работать с элементами справочников по версиям.
     """
 
+    queryset = Handbook.objects.prefetch_related("versions").distinct()
     serializer_class = HandbookSerializer
     filter_backends = (DjangoFilterBackend,)
     filterset_class = HandbookFilter
-
-    def get_queryset(self) -> QuerySet[Handbook]:
-        """
-        Возвращает QuerySet справочников с оптимизацией связанных данных.
-
-        :return: QuerySet справочников и связанные с ними версии.
-        """
-        return Handbook.objects.all().prefetch_related("versions").distinct()
 
     @swagger_auto_schema(**list_handbooks_schema)
     def list(self, request, *args, **kwargs) -> Response:
@@ -100,6 +93,6 @@ class HandbookViewSet(HandbookMixin, viewsets.ReadOnlyModelViewSet):
         :return: QuerySet элементов справочника.
         """
         version_param = request.query_params.get("version")
-        handbook = self.get_handbook_or_404(pk)
+        handbook = self.get_handbook_or_404(pk)  # type: ignore[assignment]
         version = self.get_version_or_404(handbook, version_param)
         return version.elements.all()
