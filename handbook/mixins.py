@@ -1,22 +1,32 @@
 from typing import Optional
 
+from django.db.models import QuerySet
 from django.http import Http404
+from django.shortcuts import get_object_or_404
 from rest_framework.exceptions import NotFound
 
 from .models import Handbook, HandbookVersion
 
 
 class HandbookMixin:
-    def get_handbook_or_404(self, pk: int) -> Handbook:
+    """
+    Миксин для HandbookViewSet.
+    """
+
+    def get_handbook_or_404(
+        self, pk: int, queryset: Optional[QuerySet[Handbook]]
+    ) -> Handbook:
         """
         Получает справочник по его идентификатору или возвращает 404.
 
+        :param queryset: Предзагруженный QuerySet справочников.
         :param pk: Идентификатор справочника.
         :return: Объект Handbook.
         :raises NotFound: Если справочник не найден.
         """
+        queryset = queryset or self.get_queryset()  # type: ignore[assignment]
         try:
-            return Handbook.objects.get(pk=pk)
+            return get_object_or_404(queryset, pk=pk)
         except Http404:
             raise NotFound({"error": "Handbook not found."})
 
