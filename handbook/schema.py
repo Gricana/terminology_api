@@ -16,6 +16,40 @@ schema_view = get_schema_view(
         permissions.AllowAny,
     ],
 )
+
+common_parameters = {
+    "id": openapi.Parameter(
+        "id",
+        openapi.IN_PATH,
+        description="Идентификатор справочника",
+        type=openapi.TYPE_STRING,
+    ),
+    "date": openapi.Parameter(
+        "date",
+        openapi.IN_QUERY,
+        description="Дата фильтрации справочников",
+        type=openapi.TYPE_STRING,
+    ),
+    "version": openapi.Parameter(
+        "version",
+        openapi.IN_QUERY,
+        description="Версия справочника для получения элементов",
+        type=openapi.TYPE_STRING,
+    ),
+    "code": openapi.Parameter(
+        "code",
+        openapi.IN_QUERY,
+        description="Код элемента справочника",
+        type=openapi.TYPE_STRING,
+    ),
+    "value": openapi.Parameter(
+        "value",
+        openapi.IN_QUERY,
+        description="Значение элемента",
+        type=openapi.TYPE_STRING,
+    ),
+}
+
 # Схема для получения списка справочников
 list_handbooks_schema: Dict = {
     "operation_description": "Возвращает список всех справочников, "
@@ -66,12 +100,7 @@ list_handbooks_schema: Dict = {
         ),
     },
     "manual_parameters": [
-        openapi.Parameter(
-            "date",
-            openapi.IN_QUERY,
-            description="Дата фильтрации справочников",
-            type=openapi.TYPE_STRING,
-        )
+        common_parameters["date"],
     ],
 }
 
@@ -118,18 +147,8 @@ get_handbook_elements_schema: Dict = {
         ),
     },
     "manual_parameters": [
-        openapi.Parameter(
-            "id",
-            openapi.IN_PATH,
-            description="Идентификатор справочника",
-            type=openapi.TYPE_STRING,
-        ),
-        openapi.Parameter(
-            "version",
-            openapi.IN_QUERY,
-            description="Версия справочника для получения элементов",
-            type=openapi.TYPE_STRING,
-        ),
+        common_parameters["id"],
+        common_parameters["version"],
     ],
 }
 
@@ -167,29 +186,9 @@ check_element_schema: Dict = {
         ),
     },
     "manual_parameters": [
-        openapi.Parameter(
-            "id",
-            openapi.IN_PATH,
-            description="Идентификатор справочника",
-            type=openapi.TYPE_STRING,
-        ),
-        openapi.Parameter(
-            "code",
-            openapi.IN_QUERY,
-            description="Код элемента справочника",
-            type=openapi.TYPE_STRING,
-        ),
-        openapi.Parameter(
-            "value",
-            openapi.IN_QUERY,
-            description="Значение элемента",
-            type=openapi.TYPE_STRING,
-        ),
-        openapi.Parameter(
-            "version",
-            openapi.IN_QUERY,
-            description="Версия справочника",
-            type=openapi.TYPE_STRING,
-        ),
+        common_parameters["id"],
+        common_parameters["code"],
+        common_parameters["value"],
+        common_parameters["version"],
     ],
 }
