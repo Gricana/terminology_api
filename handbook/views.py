@@ -93,6 +93,6 @@ class HandbookViewSet(HandbookMixin, viewsets.ReadOnlyModelViewSet):
         :return: QuerySet элементов справочника.
         """
         version_param = request.query_params.get("version")
-        handbook = self.get_handbook_or_404(pk)  # type: ignore[assignment]
+        handbook = self.get_handbook_or_404(pk)
         version = self.get_version_or_404(handbook, version_param)
         return version.elements.all()

@@ -14,7 +14,7 @@ class HandbookMixin:
     """
 
     def get_handbook_or_404(
-        self, pk: int, queryset: Optional[QuerySet[Handbook]]
+        self, pk: int, queryset: Optional[QuerySet[Handbook]] = None
     ) -> Handbook:
         """
         Получает справочник по его идентификатору или возвращает 404.
