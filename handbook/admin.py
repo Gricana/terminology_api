@@ -26,31 +26,29 @@ class HandbookAdmin(admin.ModelAdmin):
 
     list_display = ["get_id", "code", "name", "current_version", "current_version_date"]
     search_fields = ["code", "name"]
+    list_display_links = ["code"]
     inlines = [HandbookVersionInline]
 
+    @admin.display(description=_("ID"))
     def get_id(self, obj: Handbook) -> int:
         """
         Получить ID справочника.
         """
         return obj.id
 
-    get_id.short_description = _("ID")
-
+    @admin.display(description=_("Current Version"))
     def current_version(self, obj: Handbook) -> str:
         """
         Получить текущую версию справочника.
         """
         return obj.get_current_version()
 
-    current_version.short_description = _("Current Version")
-
+    @admin.display(description=_("Current Version Date"))
     def current_version_date(self, obj: Handbook) -> str:
         """
         Получить дату начала текущей версии справочника.
         """
         return obj.get_current_version_date()
-
-    current_version_date.short_description = _("Current Version Date")
 
 
 class HandbookElementInline(admin.TabularInline):
@@ -71,25 +69,23 @@ class HandbookVersionAdmin(admin.ModelAdmin):
     Управляет отображением версий справочников в админке.
     """
 
-    list_display = ["get_handbook__code", "get_handbook__name", "version", "start_date"]
+    list_display = ["handbook_code", "handbook_name", "version", "start_date"]
     search_fields = ["handbook__code", "handbook__name", "version"]
     inlines = [HandbookElementInline]
 
-    def get_handbook__code(self, obj: HandbookVersion) -> str:
+    @admin.display(description=_("Handbook code"))
+    def handbook_code(self, obj: HandbookVersion) -> str:
         """
         Получить код справочника для данной версии.
         """
         return obj.handbook.code
 
-    get_handbook__code.short_description = _("Handbook code")
-
-    def get_handbook__name(self, obj: HandbookVersion) -> str:
+    @admin.display(description=_("Handbook name"))
+    def handbook_name(self, obj: HandbookVersion) -> str:
         """
         Получить название справочника для данной версии.
         """
         return obj.handbook.name
-
-    get_handbook__name.short_description = _("Handbook name")
 
 
 @admin.register(HandbookElement)
