@@ -20,7 +20,7 @@ from django.contrib import admin
 from django.urls import include, path
 
 urlpatterns = i18n_patterns(
-    path("admin/", admin.site.urls),
+    path("admin/", admin.site.urls), prefix_default_language=False
 )
 
 urlpatterns += [

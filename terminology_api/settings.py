@@ -57,6 +57,7 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "django.middleware.locale.LocaleMiddleware",
+    "handbook.middleware.ForceDefaultLanguageMiddleware",
 ]
 
 ROOT_URLCONF = "terminology_api.urls"
@@ -119,16 +120,15 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = "ru"
 LANGUAGES = [
-    ("ru", "Russian"),
+    ("ru", "Русский"),
     ("en", "English"),
 ]
-
 LOCALE_PATHS = [
     BASE_DIR / "locale",
 ]
 
 TIME_ZONE = "Europe/Moscow"
-USE_L10N = False
+USE_L10N = True
 DATE_FORMAT = "Y-m-d"
 DATE_INPUT_FORMATS = ["Y-m-d"]
 
