@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-11-27 22:35+0300\n"
+"POT-Creation-Date: 2024-12-03 13:10+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -20,77 +20,78 @@ msgstr ""
 "n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || "
 "(n%100>=11 && n%100<=14)? 2 : 3);\n"
 
-#: handbook/admin.py:24
+#: handbook/admin.py:31
 msgid "ID"
 msgstr "Идентификатор"
 
-#: handbook/admin.py:29
+#: handbook/admin.py:38
 msgid "Current Version"
 msgstr "Текущая версия"
 
-#: handbook/admin.py:34
+#: handbook/admin.py:45
 msgid "Current Version Date"
 msgstr "Дата текущей версии"
 
-#: handbook/admin.py:53
+#: handbook/admin.py:75
 msgid "Handbook code"
 msgstr "Код справочника"
 
-#: handbook/admin.py:58
+#: handbook/admin.py:82
 msgid "Handbook name"
 msgstr "Имя справочника"
 
-#: handbook/admin.py:69
+#: handbook/admin.py:104
 msgid "Terminology service"
 msgstr "Сервис терминологии"
 
-#: handbook/apps.py:8 handbook/models.py:12 handbook/models.py:38
+#: handbook/apps.py:8 handbook/models.py:19 handbook/models.py:67
 msgid "Handbook"
 msgstr "Справочник"
 
-#: handbook/models.py:6
+#: handbook/filters.py:35
+msgid "Invalid date format. Use 'YYYY-MM-DD'."
+msgstr ""
+
+#: handbook/models.py:14
 msgid "Code"
 msgstr "Код справочника"
 
-#: handbook/models.py:8
+#: handbook/models.py:15
 msgid "Name"
 msgstr "Название справочника"
 
-#: handbook/models.py:9
+#: handbook/models.py:16
 msgid "Description"
 msgstr "Описание справочника"
 
-#: handbook/models.py:13
+#: handbook/models.py:20
 msgid "Handbooks"
 msgstr "Справочники"
 
-#: handbook/models.py:39 handbook/models.py:51 handbook/models.py:61
+#: handbook/models.py:69 handbook/models.py:80 handbook/models.py:101
 msgid "Handbook Version"
 msgstr "Версия справочника"
 
-#: handbook/models.py:41
+#: handbook/models.py:70
 msgid "Start date"
 msgstr "Дата начала действия версии"
 
-#: handbook/models.py:52
+#: handbook/models.py:81
 msgid "Handbook Versions"
 msgstr "Версии справочника"
 
-#: handbook/models.py:62
+#: handbook/models.py:103
 msgid "Element code"
 msgstr "Код элемента"
 
-#: handbook/models.py:63
+#: handbook/models.py:104
 msgid "Element value"
 msgstr "Значение элемента справочника"
 
-#: handbook/models.py:67
+#: handbook/models.py:108
 msgid "Handbook Element"
 msgstr "Элемент справочника"
 
-#: handbook/models.py:68
+#: handbook/models.py:109
 msgid "Handbook Elements"
 msgstr "Элементы справочника"
-
-#~ msgid "Element"
-#~ msgstr "элемента справочника"
