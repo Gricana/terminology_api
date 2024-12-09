@@ -28,7 +28,7 @@ poetry shell
 ```
 5. Примените миграции базы данных
 ```bash 
-poetry run python manage.py makemigrations
+poetry run python manage.py makemigrations handbook
 poetry run python manage.py migrate
 ```
 6. Создайте суперпользователя
@@ -43,7 +43,12 @@ poetry run python manage.py runserver
 
 ### Команды для работы с локализацией
 
-1. Компиляция переводов:
+1. Установка пакета для предоставления механизма перевода строк текста
+```bash
+sudo apt install gettext
+```
+
+2. Компиляция переводов:
 ```bash 
 poetry run django-admin compilemessages
 ```
